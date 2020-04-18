@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <meta name="theme-color" content="#317EFB"/>
+    <!-- Normalize.css for better cross-browser consistency -->
+    <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css"/>
+    <!-- Roboto Font-->
+    <link rel="import" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700">
+    <!-- Main CSS file -->
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
+    <!-- Responsive CSS file-->
+    <link rel="stylesheet" href="css/responsive1600.css" media="(min-width: 1600px)">
+    <link rel="stylesheet" href="css/responsive1440.css" media="(max-width: 1599px) and (min-width: 1440px)">
+    <link rel="stylesheet" href="css/responsive1280.css" media="(max-width: 1439px) and (min-width: 1280px)">
+    <link rel="stylesheet" href="css/responsive1024.css" media="(max-width: 1279px) and (min-width: 1024px)">
+    <link rel="stylesheet" href="css/responsive960.css" media="(max-width: 1023px) and (min-width: 960px)">
+    <link rel="stylesheet" href="css/responsive840.css" media="(max-width: 959px) and (min-width: 840px)">
+    <link rel="stylesheet" href="css/responsive720.css" media="(max-width: 839px) and (min-width: 720px)">
+    <link rel="stylesheet" href="css/responsive600.css" media="(max-width: 719px) and (min-width: 600px)">
+    <link rel="stylesheet" href="css/responsive480.css" media="(max-width: 599px) and (min-width: 480px)">
+    <link rel="stylesheet" href="css/responsive479.css" media="(max-width: 479px)">
+    <link rel="stylesheet" href="css/responsive0.css" media="(max-width: 600px) and (min-width: 0) and (orientation: landscape)">
+
+    <link rel="manifest" href="/manifest.json">
+    <title>Restaurant Info</title>
+</head>
+
+<body class="inside">
+
+<header class="main-header">
+    <nav>
+        <h1>
+            <a href="/" title="Home - discover places to eat in New York">Restaurant Reviews</a>
+        </h1>
+    </nav>
+    <nav aria-label="breadcrumb" class="breadcrumb">
+        <ol id="breadcrumb">
+            <li>
+                <a href="/" title="Home - discover places to eat in New York">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="" aria-current="page" id="current-page"></a>
+            </li>
+        </ol>
+    </nav>
+</header>
+
+
+<main id="maincontent">
+
+    <card id="restaurant-card" aria-label="restaurant information" class="row main-container">
+
+        <section id="restaurant-container" class="card">
+            <!--skip map-->
+            <a href="#restaurant-hours-container" class="skip-map" tabindex="0">
+                Skip to opening times
+            </a>
+
+            <section class="row favorite" >
+                <h2 id="restaurant-name"></h2>
+            </section>
+            <div id="restaurant-img-container">
+                <img id="restaurant-img" aria-hidden="true">
+            </div>
+            <section>
+                <p id="restaurant-cuisine"></p>
+            </section>
+
+
+
+            <section id="map-container">
+                <div id="map" role="application" aria-hidden="true"
+                     alt="a map showing the location of the restaurant"></div>
+            </section>
+
+
+
+            <section id="restaurant-info">
+                <div id="restaurant-hours-container" tabindex="0">
+                    <p id="restaurant-address" aria-label="restaurant address"></p>
+                    <table id="restaurant-hours" aria-label="restaurant opening hours"></table>
+                </div>
+            </section>
+
+
+            <section>
+                <!-- Review Form -->
+<!--                <div id="review-form" aria-label="Restaurant review form"></div>-->
+            </section>
+
+        </section>
+
+        <!-- Start reviews -->
+        <section class="reviews-container card">
+            <section id="reviews-container">
+                <section id="favorite-restaurant">
+                </section>
+                <!-- Review Form -->
+                <div id="review-form" aria-label="Restaurant review form"></div>
+                <!-- Review List -->
+                <ul id="reviews-list" role="presentation" aria-label="restaurant reviews"></ul>
+            </section>
+            <!--End reviews -->
+
+            <!-- Start offline reviews -->
+            <section id="offline-reviews-container">
+                <ul id="offline-reviews-list" role="presentation" aria-label="offline restaurant reviews"></ul>
+            </section>
+            <!--End reviews -->
+        </section>
+
+
+    </card>
+</main>
+
+<!-- Start footer -->
+<footer id="footer" class="footer">
+    <div>
+        <p>Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.</p>
+    </div>
+</footer>
+<!-- End footer -->
+
+<!-- Beginning scripts -->
+<script type="application/javascript" charset="utf-8" src="js/idb.js"></script>
+<!-- Database helpers -->
+<script type="text/javascript" src="js/dbhelper.js"></script>
+<!-- Main javascript file -->
+<script type="text/javascript" src="js/restaurant_info.js"></script>
+<!-- Google Maps -->
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFGK0lS6JRH90F34dcX988wzkxChb7iBc&libraries=places&callback=initMap"></script>
+<!-- Service Worker-->
+<script type="application/javascript" charset="utf-8" src="js/sw_registration.js"></script>
+<!-- End scripts -->
+
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+@media only screen and (max-width: 599px) and (min-width: 480px) {
+    .restaurants-list, #results-count-container, .filter-options, .inside #maincontent {
+        width: 450px
+    }
+
+    .card {
+        width: 85%;
+        margin-bottom: 24px;
+    }
+
+    #restaurant-card {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .restaurants-list li {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 4%
+    }
+
+    #restaurant-info {
+        display: flex;
+        flex-direction: column
+    }
+
+    #restaurant-hours-container, #restaurant-img-container {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto
+    }
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <meta name="theme-color" content="#536878"/>
+    <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css"/>
+    <link rel="import" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700">
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="css/responsive1600.css" media="(min-width: 1600px)">
+    <link rel="stylesheet" href="css/responsive1440.css" media="(max-width: 1599px) and (min-width: 1440px)">
+    <link rel="stylesheet" href="css/responsive1280.css" media="(max-width: 1439px) and (min-width: 1280px)">
+    <link rel="stylesheet" href="css/responsive1024.css" media="(max-width: 1279px) and (min-width: 1024px)">
+    <link rel="stylesheet" href="css/responsive960.css" media="(max-width: 1023px) and (min-width: 960px)">
+    <link rel="stylesheet" href="css/responsive840.css" media="(max-width: 959px) and (min-width: 840px)">
+    <link rel="stylesheet" href="css/responsive720.css" media="(max-width: 839px) and (min-width: 720px)">
+    <link rel="stylesheet" href="css/responsive600.css" media="(max-width: 719px) and (min-width: 600px)">
+    <link rel="stylesheet" href="css/responsive480.css" media="(max-width: 599px) and (min-width: 480px)">
+    <link rel="stylesheet" href="css/responsive479.css" media="(max-width: 479px)">
+    <link rel="stylesheet" href="css/responsive0.css" media="(max-width: 600px) and (min-width: 0) and (orientation: landscape)">
+
+    <title>Restaurant Reviews</title>
+</head>
+
+<body class="home">
+<!-- Skip to filters -->
+<a href="#filter-options" class="skip-link" tabindex="0">
+    Skip to filters
+</a>
+
+<header class="main-header">
+    <nav>
+        <h1><a href="/" aria-current="page" title="home - discover places to eat in New York">Restaurant Reviews</a>
+        </h1>
+    </nav>
+</header>
+
+<main id="main-content" class="main-content">
+    <section id="map-container" class="map-container">
+        <div id="map" class="map" role="application" aria-hidden="true" alt="a map of restaurants"></div>
+    </section>
+
+    <section id="restaurant-container" class="restaurant-container">
+        <section class="filter-options" id="filter-options">
+            <h2>Filter Results</h2>
+
+            <section id="filters" class="filters">
+                <!-- Select a neighborhood -->
+                <section class="filter">
+                    <label for="neighborhoods-select">Please Select a Neighborhood</label>
+                    <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()"
+                            aria-label="neighborhood select">
+                        <option value="all">All Neighborhoods</option>
+                    </select>
+                </section>
+
+                <!-- Select a cuisine -->
+                <section class="filter">
+                    <label for="cuisines-select">Please Select a Cuisine</label>
+                    <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()" aria-label="cuisine select">
+                        <option value="all">All Cuisines</option>
+                    </select>
+                </section>
+            </section>
+
+            <!-- Show results count -->
+            <section class="results-container">
+                <p id="results-count" class="results-count"></p>
+            </section>
+
+        </section>
+
+        <!-- Results list -->
+        <ul id="restaurants-list" class="restaurants-list" role="presentation" aria-label="restaurants list"></ul>
+    </section>
+
+</main>
+
+<script type="application/javascript" charset="utf-8" src="js/idb.js"></script>
+<script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
+<script type="application/javascript" charset="utf-8" src="js/main.js"></script>
+<script type="application/javascript" charset="utf-8" src="js/sw_registration.js"></script>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFGK0lS6JRH90F34dcX988wzkxChb7iBc&libraries=places&callback=initMap"></script>
+
+<footer id="footer" class="footer">
+    <p>Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
+
+
+

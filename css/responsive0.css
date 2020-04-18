@@ -1,0 +1,32 @@
+@media only screen and (max-width: 600px) and (min-width: 0) and (orientation: landscape) {
+    .restaurants-list, #results-count-container, .filter-options, .inside #maincontent {
+        width: 568px
+    }
+
+    #restaurant-card {
+        width: 100%
+    }
+
+    .restaurants-list li {
+        width: 49.5%
+    }
+
+    .restaurants-list li:nth-child(2n+1) {
+        margin-right: 1%
+    }
+
+    .restaurants-list li:nth-child(2n+2) {
+        margin-right: 0
+    }
+
+    #restaurant-info {
+        display: flex;
+        flex-direction: column
+    }
+
+    #restaurant-hours-container, #restaurant-img-container {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto
+    }
+}
