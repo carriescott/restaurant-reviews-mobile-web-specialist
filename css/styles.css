@@ -4,7 +4,6 @@
 body, td, th, p {
     font-family: Roboto;
     font-size: 10pt;
-    color: #333;
     line-height: 1.5;
 }
 
@@ -16,10 +15,9 @@ body {
 }
 
 ul, li {
-    /*font-family: Roboto;*/
     font-size: 10pt;
     color: #333;
-    padding-inline-start: 0px;
+    padding-inline-start: 0;
 }
 
 a {
@@ -40,7 +38,45 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
     display: block;
 }
 
+nav {
+    width: 100%;
+    height: 80px;
+    text-align: center;
+}
+
+nav h1 {
+    margin: auto;
+    line-height: 80px;
+}
+
+nav h1 a {
+    color: #fff;
+    font-size: 20pt;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+select {
+    background-color: white;
+    border: 1px solid #79D4CF;
+    font-size: 12pt;
+    height: 40px;
+    letter-spacing: 0;
+    margin: 8px 16px 8px 8px;
+    padding: 0 10px;
+}
+
 /* ====================== Home Page ====================== */
+
+
+.hide {
+    visibility: hidden;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
 
 .skip-link {
     position: absolute;
@@ -73,6 +109,41 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
     left: 380px;
 }
 
+.breadcrumb {
+    position: fixed;
+    margin-top: 92px;
+}
+
+.breadcrumb-list {
+    padding: 10px 40px 16px;
+    list-style: none;
+    background-color: #eee;
+    font-size: 20px;
+    font-family: Roboto;
+    margin: 0;
+    text-align: left;
+    max-height: 51px;
+    z-index: 100;
+}
+
+.breadcrumb-list li {
+    display: inline;
+}
+
+.breadcrumb-list li + li:before {
+    padding: 8px;
+    color: #79D4CF;
+    content: "/\00a0";
+}
+
+.breadcrumb-list li a {
+    text-decoration: none;
+}
+
+.breadcrumb-list li a:hover {
+    text-decoration: underline;
+}
+
 .main-content {
     background-color: white;
     min-height: 100%;
@@ -82,16 +153,33 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
     padding-top: 104px
 }
 
-
-
-
-
-
-.main-container {
-
+.offline-notification {
+    height: 34px;
+    width: 160px;
+    background-color: indianred;
+    position: fixed;
+    right: 0;
+    margin-top: -185px;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#restaurant-card {
+.offline-notification-main {
+    height: 34px;
+    width: 160px;
+    background-color: indianred;
+    position: fixed;
+    right: 0;
+    margin-top: 0px;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.restaurant-card {
     flex-wrap: wrap;
     display: flex;
     flex-direction: row;
@@ -99,7 +187,7 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
     border-radius: 4px;
     margin-left: auto;
     margin-right: auto;
- }
+}
 
 .card {
     width: 45%;
@@ -109,7 +197,7 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
-#footer {
+.footer {
     background-color: #444;
     color: #aaa;
     font-size: 8pt;
@@ -121,28 +209,9 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
 }
 
 /* ====================== Navigation ====================== */
-nav {
-    width: 100%;
-    height: 80px;
-    text-align: center;
-}
 
-nav h1 {
-    margin: auto;
-    line-height: 80px;
-}
 
-nav h1 a {
-    color: #fff;
-    font-size: 20pt;
-    font-weight: 400;
-    letter-spacing: 2px;
-}
 
-.row {
-    display: flex;
-    flex-direction: row;
-}
 
 .main-header {
     position: fixed;
@@ -156,7 +225,7 @@ nav h1 a {
     background-image: url('/img/filterbk.png');
     background-size: contain;
     background-position: center;
-    z-index:1;
+    z-index: 1;
 }
 
 .filters {
@@ -169,44 +238,6 @@ nav h1 a {
     flex-direction: column;
 }
 
-.breadcrumb {
-    position: fixed;
-    margin-top: 92px;
-}
-
-#breadcrumb {
-    padding: 10px 40px 16px;
-    list-style: none;
-    background-color: #eee;
-    font-size: 20px;
-    font-family: Roboto;
-    margin: 0;
-    text-align: left;
-    max-height: 51px;
-    z-index: 100;
-}
-
-/* Display list items side by side */
-#breadcrumb li {
-    display: inline;
-}
-
-/* Add a slash symbol (/) before/behind each list item */
-#breadcrumb li + li:before {
-    padding: 8px;
-    color: #79D4CF;
-    content: "/\00a0";
-}
-
-/* Add a color to all links inside the list */
-#breadcrumb li a {
-    text-decoration: none;
-}
-
-/* Add a color on mouse-over */
-#breadcrumb li a:hover {
-    text-decoration: underline;
-}
 
 /* ====================== Map ====================== */
 
@@ -231,34 +262,8 @@ nav h1 a {
 }
 
 .filter-options select {
-    background-color: white;
-    border: 2px solid #79D4CF;
-    /*font-family: Roboto;*/
-    font-size: 12pt;
-    height: 40px;
-    letter-spacing: 0;
-    margin: 8px 16px 8px 0;
-    padding: 0 10px;
+    margin: 8px 16px 8px 0px;
     width: 200px;
-}
-
-.filter-container select {
-    background-color: white;
-    border: 1px solid #fff;
-    /*font-family: Roboto;*/
-    font-size: 11pt;
-    height: 35px;
-    letter-spacing: 0;
-    margin: 10px;
-    padding: 0 10px;
-    width: 200px;
-}
-
-#filter-content {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    width: 100%;
 }
 
 /* ====================== Restaurant Listing ====================== */
@@ -288,8 +293,7 @@ nav h1 a {
 .restaurants-list .restaurant-img {
     background-color: #ccc;
     display: block;
-    margin: 0;
-    margin-bottom: 10px;
+    margin: 0 0 10px 0;
     max-width: 100%;
     min-height: 248px;
     min-width: 100%;
@@ -332,7 +336,7 @@ nav h1 a {
     justify-content: space-between;
 }
 
-#favorite-restaurant button {
+.favorite-restaurant button {
     background-color: #79D4CF;
     color: #fff;
     display: inline-block;
@@ -344,7 +348,7 @@ nav h1 a {
     border-radius: 4px;
 }
 
-#submitButton {
+.submitButton {
     background-color: #79D4CF;
     color: #fff;
     display: inline-block;
@@ -372,7 +376,7 @@ nav h1 a {
     z-index: 1000;
 }
 
-.inside #maincontent {
+.inside .restaurant-main-content {
     min-height: 100%;
     margin: 185px auto 25px auto;
     width: 960px;
@@ -382,13 +386,13 @@ nav h1 a {
     width: 100%;
 }
 
-.inside #map {
+.inside .map {
     background-color: #ccc;
     border-bottom-style: hidden;
     height: 250px;
 }
 
-.inside #footer {
+.inside .footer {
     bottom: 0;
     width: 100%;
     background-color: transparent;
@@ -397,7 +401,7 @@ nav h1 a {
     margin-right: auto;
 }
 
-#restaurant-name {
+.restaurant-name {
     color: #79D4CF;
     font-family: Roboto;
     font-size: 16pt;
@@ -407,17 +411,16 @@ nav h1 a {
     text-align: center;
 }
 
-#restaurant-img {
+.inside .restaurant-img {
     width: 100%;
     border-radius: 4px;
 }
 
-
-#restaurant-address {
+.restaurant-address {
     font-size: 16pt;
 }
 
-#restaurant-cuisine {
+.restaurant-cuisine {
     justify-content: center;
     align-items: center;
     display: flex;
@@ -431,29 +434,27 @@ nav h1 a {
     font-family: Roboto;
     text-align: center;
     height: 32px;
-
 }
 
-#reviews-container h3 {
+.reviews-container h3 {
     color: #333;
     font-size: 14pt;
     font-weight: 400;
 }
 
-#reviews-list {
+.comments {
+    width: 100%;
+    height: 80px;
+    border-radius: 4px;
+    margin: 8px 0px;
+    border: #79D4CF solid 1px;
+}
+
+.reviews-list {
     margin-top: 60px;
 }
 
-#offline-reviews-list {
-    margin: 0;
-}
-
-.comments {
-    width: 100%;
-    height: 80px
-}
-
-#reviews-list li {
+.reviews-list li {
     background-color: #fff;
     border-radius: 2px;
     display: block;
@@ -465,7 +466,17 @@ nav h1 a {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
-#offline-reviews-list li {
+.reviews-list li p {
+    margin: 0 0 12px;
+    font-family: Roboto;
+    font-size: 10pt;
+}
+
+.offline-reviews-list {
+    margin: 0;
+}
+
+.offline-reviews-list li {
     background-color: #fff;
     border-radius: 2px;
     display: block;
@@ -478,42 +489,41 @@ nav h1 a {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
-#reviews-list li p {
+.offline-reviews-list li p {
     margin: 0 0 12px;
     font-family: Roboto;
     font-size: 10pt;
 }
 
-#offline-reviews-list li p {
-    margin: 0 0 12px;
-    font-family: Roboto;
-    font-size: 10pt;
-}
-
-#restaurant-hours td {
+.restaurant-hours td {
     color: #666;
 }
 
-#restaurant-hours {
+.restaurant-hours {
     font-size: 12pt;
     height: 83%;
 }
 
-#reviewer {
-    font-weight: 600;
-}
-
-#restaurant-hours-container {
+.restaurant-hours-container {
     float: right;
 }
 
 .formElements {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px 0;
 }
+
+.form-name {
+    margin: 8px 0px 16px 0px;
+    height: 33px;
+    font-size: 12pt;
+    width: 100%;
+    border-radius: 4px;
+    border: solid 1px #79D4CF;
+}
+
 /* ====================== Breadcrumb ====================== */
 
-#restaurant-info {
+.restaurant-info {
     display: flex;
     flex-direction: row;
 }

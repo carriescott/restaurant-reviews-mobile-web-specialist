@@ -29,6 +29,10 @@
 
 <body class="inside">
 
+<section id="offline-notification" class="offline-notification hide">
+    <p>You are offline!</p>
+</section>
+
 <header class="main-header">
     <nav>
         <h1>
@@ -36,7 +40,7 @@
         </h1>
     </nav>
     <nav aria-label="breadcrumb" class="breadcrumb">
-        <ol id="breadcrumb">
+        <ol id="breadcrumb" class="breadcrumb-list">
             <li>
                 <a href="/" title="Home - discover places to eat in New York">
                     Home
@@ -50,9 +54,9 @@
 </header>
 
 
-<main id="maincontent">
+<main class="restaurant-main-content">
 
-    <card id="restaurant-card" aria-label="restaurant information" class="row main-container">
+    <card aria-label="restaurant information" class="row main-container restaurant-card">
 
         <section id="restaurant-container" class="card">
             <!--skip map-->
@@ -61,54 +65,44 @@
             </a>
 
             <section class="row favorite" >
-                <h2 id="restaurant-name"></h2>
+                <h2 id="restaurant-name" class="restaurant-name"></h2>
             </section>
             <div id="restaurant-img-container">
-                <img id="restaurant-img" aria-hidden="true">
+                <img id="restaurant-img" class="restaurant-image" aria-hidden="true">
             </div>
             <section>
-                <p id="restaurant-cuisine"></p>
+                <p id="restaurant-cuisine" class="restaurant-cuisine"></p>
             </section>
 
-
-
             <section id="map-container">
-                <div id="map" role="application" aria-hidden="true"
+                <div id="map" class="map" role="application" aria-hidden="true"
                      alt="a map showing the location of the restaurant"></div>
             </section>
 
-
-
-            <section id="restaurant-info">
-                <div id="restaurant-hours-container" tabindex="0">
-                    <p id="restaurant-address" aria-label="restaurant address"></p>
-                    <table id="restaurant-hours" aria-label="restaurant opening hours"></table>
+            <section id="restaurant-info" class="restaurant-info">
+                <div id="restaurant-hours-container" class="restaurant-hours-container" tabindex="0">
+                    <p id="restaurant-address" class=restaurant-address" aria-label="restaurant address"></p>
+                    <table id="restaurant-hours" class="restaurant-hours" aria-label="restaurant opening hours"></table>
                 </div>
-            </section>
-
-
-            <section>
-                <!-- Review Form -->
-<!--                <div id="review-form" aria-label="Restaurant review form"></div>-->
             </section>
 
         </section>
 
         <!-- Start reviews -->
-        <section class="reviews-container card">
-            <section id="reviews-container">
-                <section id="favorite-restaurant">
+        <section class="card">
+            <section id="reviews-container" class="reviews-container">
+                <section id="favorite-restaurant" class="favorite-restaurant">
                 </section>
                 <!-- Review Form -->
                 <div id="review-form" aria-label="Restaurant review form"></div>
                 <!-- Review List -->
-                <ul id="reviews-list" role="presentation" aria-label="restaurant reviews"></ul>
+                <ul id="reviews-list" class="reviews-list" role="presentation" aria-label="restaurant reviews"></ul>
             </section>
             <!--End reviews -->
 
             <!-- Start offline reviews -->
             <section id="offline-reviews-container">
-                <ul id="offline-reviews-list" role="presentation" aria-label="offline restaurant reviews"></ul>
+                <ul id="offline-reviews-list" class="offline-reviews-list" role="presentation" aria-label="offline restaurant reviews"></ul>
             </section>
             <!--End reviews -->
         </section>
@@ -118,7 +112,7 @@
 </main>
 
 <!-- Start footer -->
-<footer id="footer" class="footer">
+<footer class="footer">
     <div>
         <p>Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.</p>
     </div>
@@ -136,6 +130,8 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFGK0lS6JRH90F34dcX988wzkxChb7iBc&libraries=places&callback=initMap"></script>
 <!-- Service Worker-->
 <script type="application/javascript" charset="utf-8" src="js/sw_registration.js"></script>
+
+
 <!-- End scripts -->
 
 </body>

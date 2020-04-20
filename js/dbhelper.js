@@ -79,28 +79,24 @@ class DBHelper {
      */
 
     static fetchRestaurants(callback) {
+        console.log('fetchRestaurant');
 
         fetch(DBHelper.DATABASE_URL)
-
             .then(function(response) {
-                console.log('response', response);
                 // Read the response as json.
                 return response.json();
             })
             .then(function(responseAsJson) {
                 const restaurants = responseAsJson;
-                console.log('restaurants', restaurants);
                 callback(null, restaurants);
                 //Add data to indexedBD
                 DBHelper.addToIDB('restaurant', restaurants, 'restaurants');
             })
             .catch(function(error) {
-                var IDB = DBHelper.getFromIDB('restaurant', 'restaurants');
-                console.log('Looks like there was a problem: \n', error);
+                const IDB = DBHelper.getFromIDB('restaurant', 'restaurants');
                 IDB.then(function(result) {
                     const myRestaurant = result;
                     callback(null, myRestaurant);
-                    console.log(myRestaurant);
                 }, function(err) {
                     console.log(err);
                 });
@@ -115,42 +111,31 @@ class DBHelper {
 
     static fetchReview(id, callback) {
 
-        console.log('yippee id', id);
-
         fetch(`http://localhost:1337/reviews/?restaurant_id=${id}`)
         // fetch(DBHelper.DATABASE_URL_Review)
             .then(function (response) {
-                console.log('response', response);
                 // Read the response as json.
                 return response.json();
             })
             .then(function (responseAsJson) {
                 const review = responseAsJson;
-                console.log('review', review);
-                var i;
+                let i;
                 for (i = 0; i < review.length; i++) {
-                    console.log('review id', review[i].id);
                     // DBHelper.addToIDB(review[i].id, review[i], 'restaurant-reviews');
                     DBHelper.addToReviewsIDB(review[i]);
                 }
                 callback(null, review);
             })
             .catch(function (error) {
-                var IDB = DBHelper.getAllFromIDB('restaurant-reviews');
-                // console.log('Looks like there was a problem: \n', error);
+                const IDB = DBHelper.getAllFromIDB('restaurant-reviews');
                 IDB.then(function(result) {
                     const myReviews = result;
-                    console.log('myReviews', myReviews);
-                    var i;
+                    let i;
                     const test = [];
                     for (i = 0; i < myReviews.length; i++) {
-                        console.log('review id', myReviews[i].id);
-                        console.log('review restaurant id', myReviews[i].restaurant_id);
                         if (myReviews[i].restaurant_id == id) {
-                            console.log('myReviewYippee', myReviews[i]);
                             test.push(myReviews[i]);
                         }
-                        console.log('test', test);
                     }
                     callback(null, test);
                 }, function(err) {
@@ -170,26 +155,21 @@ class DBHelper {
         fetch(DBHelper.DATABASE_URL_Favorites)
 
             .then(function (response) {
-                console.log('response', response);
                 // Read the response as json.
                 return response.json();
             })
             .then(function (responseAsJson) {
                 const favorites = responseAsJson;
-                console.log('favorites', favorites);
-                var i;
+                let i;
                 for (i = 0; i < favorites.length; i++) {
-                    console.log('favorites, id', favorites[i].id);
                     DBHelper.addToIDB(favorites[i].id, favorites[i], 'favorite-restaurants');
                 }
                 callback(null, favorites);
             })
             .catch(function (error) {
-                var IDB = DBHelper.getAllFromIDB('favorite-restaurants');
-                console.log('Looks like there was a problem: \n', error);
+                const IDB = DBHelper.getAllFromIDB('favorite-restaurants');
                 IDB.then(function(result) {
                     const favoriteRestaurants = result;
-                    console.log('favoriteRestaurants', favoriteRestaurants);
                     callback(null, favoriteRestaurants);
 
                 }, function(err) {
@@ -203,7 +183,6 @@ class DBHelper {
      * Fetch a review by restaurant ID.
      */
     static fetchReviewById(id, callback) {
-        console.log('fetchReviewByID', id);
         // fetch all restaurants with proper error handling.
         DBHelper.fetchReview((error, reviews) => {
             if (error) {
@@ -226,7 +205,6 @@ class DBHelper {
      * Fetch a favorites by restaurant ID.
      */
     static fetchFavoritesById(id, callback) {
-        console.log('fetchReviewByID', id);
         // fetch all restaurants with proper error handling.
         DBHelper.fetchFavorites((error, favoritess) => {
             if (error) {
@@ -385,9 +363,6 @@ class DBHelper {
      * Restaurant image URL.
      */
     static imageUrlForRestaurant(restaurant) {
-        console.log('imageUrlForRestaurant', restaurant);
-        console.log('restaurantPhoto', restaurant.photograph);
-
         if (restaurant.photograph === undefined) {
             return (`/img/default.jpg`);
         } else {
@@ -425,12 +400,6 @@ class DBHelper {
 
 
     static saveOffline(form) {
-
-        console.log('save offline', form);
-        console.log(form.name.value);
-        console.log(form.comments.value);
-        console.log(form.id.value);
-
         const formObject = {
             "restaurant_id": form.id.value,
             "name": form.name.value,
@@ -438,18 +407,16 @@ class DBHelper {
             "rating": form.restaurantRating.value,
         };
 
-
-        var IDB = DBHelper.addToReviewsIDB(formObject);
+        const IDB = DBHelper.addToReviewsIDB(formObject);
         IDB.then(function(result) {
             const restaurantReview = result;
-            console.log('restaurantReview', restaurantReview);
-            // callback(null, restaurantReview);
-        }, function(err) {
-            console.log(err);
+            console.log('review', restaurantReview, 'was added to IDB');
+        })
+            .catch(function(error) {
+            console.log(error);
         });
 
         DBHelper.postReviewToDatabase(formObject);
-
     }
 
     static postReviewToDatabase(formObject) {
@@ -462,18 +429,16 @@ class DBHelper {
                 body: JSON.stringify(formObject),
             })
             .then(function(response) {
-                console.log('response', response);
                 return response.json();
             })
             .then(function(responseAsJson) {
                 const data = responseAsJson;
-                console.log('data', data);
+                console.log('online', data);
                 return data;
             })
             .catch(function (error) {
-                console.log('Looks like there was a problem: \n', error);
+                console.log('offline');
                 setTimeout(DBHelper.postReviewToDatabase, 30000, formObject);
-                console.log('setTimeout is working');
             });
 
     }
@@ -489,20 +454,19 @@ class DBHelper {
             {method: 'PUT'
             })
             .then(function(response) {
-                console.log('response', response);
                 return response.json();
             })
             .then(function(responseAsJson) {
                 const data = responseAsJson;
-                console.log('setFavoriteStatusData', data);
             })
             .catch(function (error) {
-                console.log('Looks like there was a problem: \n', error);
                 setTimeout(DBHelper.setFavoriteStatus, 30000, id, status);
-                console.log('setTimeout is working');
             });
 
     }
+
+
+
 
 }
 
