@@ -1,8 +1,22 @@
 let restaurants, neighborhoods, cuisines;
+/**
+ * Global scope required for google maps javascript API.
+ */
 var map;
 var markers = [];
 
 
+/**
+ * Fetch neighborhoods and cuisines as soon as the page is loaded.
+ */
+document.addEventListener('DOMContentLoaded', (event) => {
+    fetchNeighborhoods();
+    fetchCuisines();
+});
+
+/**
+ * Add an event listener for offline/online notification.
+ */
 window.addEventListener("load", () => {
     if (navigator.onLine) {
         document.getElementById("offline-notification-main").classList.add("hide");
@@ -21,77 +35,66 @@ window.addEventListener("load", () => {
 });
 
 
-
-/**
- * Fetch neighborhoods and cuisines as soon as the page is loaded.
- */
-document.addEventListener('DOMContentLoaded', (event) =>{
-    fetchNeighborhoods();
-    fetchCuisines();
-    });
 /**
  * Fetch all neighborhoods and set their HTML.
  */
-fetchNeighborhoods = () =>
-{
+fetchNeighborhoods = () => {
     DBHelper.fetchNeighborhoods((error, neighborhoods) => {
-        if (error) { // Got an error
+        if (error) {
+            //Error Handling
             console.error(error);
         } else {
             self.neighborhoods = neighborhoods;
-    fillNeighborhoodsHTML();
+            fillNeighborhoodsHTML();
+        }
+    }
+    );
 }
-})
-    ;
-}
-;
+
 /**
  * Set neighborhoods HTML.
  */
-fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) =>
-{
+fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
     const select = document.getElementById('neighborhoods-select');
     neighborhoods.forEach(neighborhood => {
         const option = document.createElement('option');
         option.innerHTML = neighborhood;
         option.value = neighborhood;
         select.append(option);
-});
+    });
 }
+
 /**
  * Fetch all cuisines and set their HTML.
  */
-fetchCuisines = () =>
-{
+fetchCuisines = () => {
+    console.log('self', self);
     DBHelper.fetchCuisines((error, cuisines) => {
-        if (error) { // Got an error!
+        if (error) {
             console.error(error);
         } else {
             self.cuisines = cuisines;
-    fillCuisinesHTML();
-}
-})
-    ;
+            fillCuisinesHTML();
+        }
+    });
 }
 
 /**
  * Set cuisines HTML.
  */
-fillCuisinesHTML = (cuisines = self.cuisines) =>
-{
+fillCuisinesHTML = (cuisines = self.cuisines) => {
     const select = document.getElementById('cuisines-select');
     cuisines.forEach(cuisine => {
         const option = document.createElement('option');
         option.innerHTML = cuisine;
         option.value = cuisine;
         select.append(option);
-});
+    });
 }
 /**
  * Initialize Google map, called from HTML.
  */
-window.initMap = () =>
-{
+window.initMap = () => {
     let loc = {
         lat: 40.722216,
         lng: -73.987501
@@ -107,8 +110,7 @@ window.initMap = () =>
 /**
  * Update page and map for current restaurants.
  */
-updateRestaurants = () =>
-{
+updateRestaurants = () => {
     const cSelect = document.getElementById('cuisines-select');
     const nSelect = document.getElementById('neighborhoods-select');
 
@@ -123,22 +125,21 @@ updateRestaurants = () =>
             console.error(error);
         } else {
             resetRestaurants(restaurants);
-    fillRestaurantsHTML();
-}
-})
+            fillRestaurantsHTML();
+        }
+    })
 }
 /**
  * Clear current restaurants, their HTML and remove their map markers.
  */
-resetRestaurants = (restaurants) =>
-{
+resetRestaurants = (restaurants) => {
     // Remove all restaurants
     self.restaurants = [];
     const ul = document.getElementById('restaurants-list');
     ul.innerHTML = '';
     // Remove all map markers
     self.markers.forEach(m => m.setMap(null)
-)
+    )
     ;
     self.markers = [];
     self.restaurants = restaurants;
@@ -146,12 +147,11 @@ resetRestaurants = (restaurants) =>
 /**
  * Create all restaurants HTML and add them to the webpage.
  */
-fillRestaurantsHTML = (restaurants = self.restaurants) =>
-{
+fillRestaurantsHTML = (restaurants = self.restaurants) => {
     const ul = document.getElementById('restaurants-list');
     restaurants.forEach(restaurant => {
         ul.append(createRestaurantHTML(restaurant));
-})
+    })
     ;
     addMarkersToMap();
     //Get count of restaurants returned in the list
@@ -160,6 +160,7 @@ fillRestaurantsHTML = (restaurants = self.restaurants) =>
     const resString = setResultString(resultsCount);
     resultHeader.innerHTML = resString;
 }
+
 /**
  * Create results count.
  */
@@ -172,11 +173,11 @@ function setResultString(res) {
     }
     return resString;
 }
+
 /**
  * Create restaurant HTML.
  */
-createRestaurantHTML = (restaurant) =>
-{
+createRestaurantHTML = (restaurant) => {
     const li = document.createElement('li');
     li.className = 'list-item';
     li.setAttribute("role", "option");
@@ -211,13 +212,12 @@ createRestaurantHTML = (restaurant) =>
 
     function onChanges(changes, observer) {
         changes.forEach(change => {
-            if (change.intersectionRatio > 0)
-        {
-            loadImage(change.target);
-            observer.unobserve(change.target);
-        } else {
+            if (change.intersectionRatio > 0) {
+                loadImage(change.target);
+                observer.unobserve(change.target);
+            } else {
                 console.log('no-preloader');
-        }
+            }
         });
     }
 
@@ -250,17 +250,16 @@ createRestaurantHTML = (restaurant) =>
 /**
  * Add markers for current restaurants to the map.
  */
-addMarkersToMap = (restaurants = self.restaurants) =>
-{
+addMarkersToMap = (restaurants = self.restaurants) => {
     console.log('restaurantsMain', restaurants);
     restaurants.forEach(restaurant => {
         // Add marker to the map
         const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.map);
-    google.maps.event.addListener(marker, 'click', () => {
-        window.location.href = marker.url
-});
-    self.markers.push(marker);
-});
+        google.maps.event.addListener(marker, 'click', () => {
+            window.location.href = marker.url
+        });
+        self.markers.push(marker);
+    });
 }
 
 
