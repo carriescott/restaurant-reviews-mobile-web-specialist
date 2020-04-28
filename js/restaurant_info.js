@@ -74,7 +74,7 @@ fetchRestaurantFromURL = (callback) => {
 
 
 /**
- * Get a list of favourite restaurants from the DB
+ * Get a list of favourite restaurants from the db.
  */
 fetchFavoritesFromURL = (callback) => {
     if (self.favorites) {
@@ -116,7 +116,7 @@ fillReviewsHTML = (reviews) => {
 
 
 /**
- * Create restaurant HTML and add it to the webpage
+ * Create restaurant HTML and add it to the webpage.
  */
 fillRestaurantHTML = (restaurant = self.restaurant) => {
 
@@ -162,6 +162,10 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
 }
 
+
+/**
+ * Toggle text of favourites button.
+ */
 fillFavouriteRestaurantHTML = (id, status, data) => {
 
     if (status === 'true' || status === true) {
@@ -175,6 +179,10 @@ fillFavouriteRestaurantHTML = (id, status, data) => {
 
 }
 
+
+/**
+ * Toggle favourite status and store in idb.
+ */
 function toggleFavorite(id, status, data) {
 
     if (status === 'true' || status === true) {
@@ -240,7 +248,6 @@ createReviewHTML = (review) => {
 /**
  * Create review HTML and add it to the webpage.
  */
-
 createReviewFormHTML = (id = self.restaurant.id) => {
 
     const form = document.getElementById('review-form');
@@ -348,7 +355,7 @@ createReviewFormHTML = (id = self.restaurant.id) => {
 
 
 /**
- * Add restaurant name to the breadcrumb navigation menu
+ * Add restaurant name to the breadcrumb navigation menu.
  */
 fillBreadcrumb = (restaurant = self.restaurant) => {
     const linkName = document.getElementById('current-page');
@@ -372,7 +379,9 @@ getParameterByName = (name, url) => {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-
+/**
+ * Get and fill reviews created when offline.
+ */
 function fillOfflineReviewsHTML(event, form) {
     event.preventDefault();
     const timestamp = new Date().getTime();

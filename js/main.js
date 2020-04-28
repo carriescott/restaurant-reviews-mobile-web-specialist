@@ -1,10 +1,9 @@
 let restaurants, neighborhoods, cuisines;
 /**
- * Global scope required for google maps javascript API.
+ * Global scope required for google maps JavaScript API.
  */
 var map;
 var markers = [];
-
 
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
@@ -163,7 +162,6 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 /**
  * Create results count.
  */
-
 function setResultString(res) {
     let resString;
     if (res) {
@@ -258,20 +256,3 @@ addMarkersToMap = (restaurants = self.restaurants) => {
         self.markers.push(marker);
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

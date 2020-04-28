@@ -7,7 +7,6 @@ const dbPromise = idb.open('restaurant-details', 1, upgradeDB => {
 /**
  * Common database helper functions.
  */
-
 class DBHelper {
 
     /**
@@ -73,7 +72,6 @@ class DBHelper {
     /**
      * Fetch all restaurants from the database and store it in an idb.
      */
-
     static fetchRestaurants(callback) {
         fetch(DBHelper.DATABASE_URL)
             .then(function (response) {
@@ -99,7 +97,6 @@ class DBHelper {
     /**
      * Fetch all reviews from the database and store it in an idb.
      */
-
     static fetchReview(id, callback) {
 
         fetch(`http://localhost:1337/reviews/?restaurant_id=${id}`)
@@ -137,7 +134,6 @@ class DBHelper {
     /**
      * Fetch favorite restuarants from the database and store it in an idb.
      */
-
     static fetchFavorites(callback) {
 
         fetch(DBHelper.DATABASE_URL_Favorites)
@@ -353,7 +349,9 @@ class DBHelper {
         return marker;
     }
 
-
+    /**
+     * Save reviews to idb before sending to the db.
+     */
     static saveOffline(form) {
         const formObject = {
             "restaurant_id": form.id.value,
@@ -371,6 +369,9 @@ class DBHelper {
         DBHelper.postReviewToDatabase(formObject);
     }
 
+    /**
+     * Post reviews to db.
+     */
     static postReviewToDatabase(formObject) {
         return fetch(`http://localhost:1337/reviews/`,
             {
@@ -395,7 +396,7 @@ class DBHelper {
     }
 
     /**
-     * Set Favorite Status
+     * Set favorite status.
      */
     static setFavoriteStatus(id, status) {
         return fetch(`http://localhost:1337/restaurants/${id}/?is_favorite=${status}`,
