@@ -1,15 +1,16 @@
 @media only screen and (max-width: 479px) {
-    #restaurant-card, .restaurants-list, #results-count-container, .filter-options {
-        width: 90%;
-    }
 
     nav h1 a {
         color: #fff;
         font-size: 16pt;
         font-weight: 400;
         letter-spacing: 2px;
-        /* text-transform: uppercase; */
     }
+
+    .restaurant-card, .restaurants-list, .filter-options {
+        width: 90%;
+    }
+
     .breadcrumb {
         margin-top: 84px;
     }
@@ -48,15 +49,16 @@
         flex-direction: column
     }
 
-    #restaurant-card {
+    .restaurant-card {
         box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent;
         background-color: #fdfdfd;
         justify-content: center;
     }
 
-    .restaurant-hours-container, #restaurant-img-container {
+    .restaurant-hours-container, .restaurant-img-container {
         width: 80%;
         margin-left: auto;
         margin-right: auto
     }
+
 }

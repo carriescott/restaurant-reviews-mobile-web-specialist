@@ -1,5 +1,6 @@
 @media only screen and (max-width: 600px) and (min-width: 0) and (orientation: landscape) {
-    .restaurants-list, #results-count-container, .filter-options, .inside .restaurant-main-content {
+
+    .restaurants-list, .filter-options, .inside .restaurant-main-content {
         width: 568px
     }
 
@@ -24,9 +25,10 @@
         flex-direction: column
     }
 
-    .restaurant-hours-container, #restaurant-img-container {
+    .restaurant-hours-container, .restaurant-img-container {
         width: 80%;
         margin-left: auto;
         margin-right: auto
     }
+
 }

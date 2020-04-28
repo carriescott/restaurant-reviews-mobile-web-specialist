@@ -1,9 +1,10 @@
 @media only screen and (max-width: 959px) and (min-width: 840px) {
-    .restaurants-list, #results-count-container, .filter-options {
+
+    .restaurants-list, .filter-options {
         width: 810px
     }
 
-    #restaurant-card {
+    .restaurant-card {
         width: 100%
     }
 
@@ -22,4 +23,5 @@
     .restaurants-list li:nth-child(2n+2) {
         margin-right: 0
     }
+
 }

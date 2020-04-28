@@ -252,6 +252,7 @@ createReviewFormHTML = (id = self.restaurant.id) => {
     form.appendChild(reviewForm);
 
     const title = document.createElement('h2'); // Heading of Form
+    title.setAttribute("class", "review");
     title.innerHTML = "Add a Review?";
     reviewForm.appendChild(title);
 

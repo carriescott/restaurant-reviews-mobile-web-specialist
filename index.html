@@ -20,12 +20,10 @@
     <link rel="stylesheet" href="css/responsive480.css" media="(max-width: 599px) and (min-width: 480px)">
     <link rel="stylesheet" href="css/responsive479.css" media="(max-width: 479px)">
     <link rel="stylesheet" href="css/responsive0.css" media="(max-width: 600px) and (min-width: 0) and (orientation: landscape)">
-
     <title>Restaurant Reviews</title>
 </head>
 
 <body class="home">
-<!-- Skip to filters -->
 <a href="#filter-options" class="skip-link" tabindex="0">
     Skip to filters
 </a>
@@ -45,52 +43,43 @@
     <section id="map-container" class="map-container">
         <div id="map" class="map" role="application" aria-hidden="true" alt="a map of restaurants"></div>
     </section>
-
     <section id="restaurant-container" class="restaurant-container">
         <section class="filter-options" id="filter-options">
             <h2>Filter Results</h2>
-
             <section id="filters" class="filters">
-                <!-- Select a neighborhood -->
-                <section class="filter">
+                <section class="col">
                     <label for="neighborhoods-select">Please Select a Neighborhood</label>
-                    <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()"
+                    <select id="neighborhoods-select"
+                            name="neighborhoods"
+                            onchange="updateRestaurants()"
                             aria-label="neighborhood select">
                         <option value="all">All Neighborhoods</option>
                     </select>
                 </section>
-
-                <!-- Select a cuisine -->
-                <section class="filter">
+                <section class="col">
                     <label for="cuisines-select">Please Select a Cuisine</label>
-                    <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()" aria-label="cuisine select">
+                    <select id="cuisines-select"
+                            name="cuisines"
+                            onchange="updateRestaurants()"
+                            aria-label="cuisine select">
                         <option value="all">All Cuisines</option>
                     </select>
                 </section>
             </section>
-
-            <!-- Show results count -->
             <section class="results-container">
                 <p id="results-count" class="results-count"></p>
             </section>
-
         </section>
-
-        <!-- Results list -->
         <ul id="restaurants-list" class="restaurants-list" role="presentation" aria-label="restaurants list"></ul>
     </section>
-
 </main>
 
 <script type="application/javascript" charset="utf-8" src="js/idb.js"></script>
 <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
 <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
-
 <script type="application/javascript" charset="utf-8" src="js/sw_registration.js"></script>
-
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFGK0lS6JRH90F34dcX988wzkxChb7iBc&libraries=places&callback=initMap"></script>
-
 <footer class="footer">
     <p>Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.</p>
 </footer>
