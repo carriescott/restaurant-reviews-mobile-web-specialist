@@ -1,13 +1,16 @@
 let restaurant;
 const favorite_btn = document.createElement('button');
 
-// add an event listener to log when the user is on/offline
+/**
+ * Add an event listener for offline/online notification.
+ */
 window.addEventListener("load", () => {
     if (navigator.onLine) {
         document.getElementById("offline-notification").classList.add("hide");
     } else {
         document.getElementById("offline-notification").classList.remove("hide");
     }
+
     function handleNetworkChange(event) {
         if (navigator.onLine) {
             document.getElementById("offline-notification").classList.add("hide");
@@ -15,15 +18,14 @@ window.addEventListener("load", () => {
             document.getElementById("offline-notification").classList.remove("hide");
         }
     }
+
     window.addEventListener("online", handleNetworkChange);
     window.addEventListener("offline", handleNetworkChange);
 });
 
-
 /**
  * Initialize Google map, called from HTML.
  */
-
 window.initMap = () => {
     fetchRestaurantFromURL((error, restaurant) => {
         if (error) {
@@ -43,19 +45,18 @@ window.initMap = () => {
             console.error(error);
         }
     });
-
 }
 
 /**
  * Get current restaurant from page URL.
  */
 fetchRestaurantFromURL = (callback) => {
-    if (self.restaurant) { // restaurant already fetched!
+    if (self.restaurant) {
         callback(null, self.restaurant)
         return;
     }
     const id = getParameterByName('id');
-    if (!id) { // no id found in URL
+    if (!id) {
         const error = 'No restaurant id in URL'
         callback(error, null);
     } else {
@@ -68,18 +69,21 @@ fetchRestaurantFromURL = (callback) => {
             fillRestaurantHTML();
             callback(null, restaurant)
         });
-
     }
 }
 
+
+/**
+ * Get a list of favourite restaurants from the DB
+ */
 fetchFavoritesFromURL = (callback) => {
-    if (self.favorites) { // restaurant already fetched!
-        callback(null, self.favorites)
+    if (self.favorites) {
+        callback(null, self.favorites);
         return;
     }
     const id = getParameterByName('id');
-    if (!id) { // no id found in URL
-        error = 'No restaurant id in URL'
+    if (!id) {
+        let error = 'No restaurant id in URL';
         callback(error, null);
     } else {
         DBHelper.fetchFavoritesById(id, (error, favorites) => {
@@ -87,16 +91,14 @@ fetchFavoritesFromURL = (callback) => {
                 console.error(error);
                 return;
             }
-            callback(null, favorites)
-        })
-        ;
+            callback(null, favorites);
+        });
     }
 }
 
 /**
  * Create all reviews HTML and add them to the webpage.
  */
-
 fillReviewsHTML = (reviews) => {
     const container = document.getElementById('reviews-container');
     if (!reviews) {
@@ -108,8 +110,7 @@ fillReviewsHTML = (reviews) => {
     const ul = document.getElementById('reviews-list');
     reviews.forEach(review => {
         ul.appendChild(createReviewHTML(review));
-    })
-    ;
+    });
     container.appendChild(ul);
 }
 
@@ -134,7 +135,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     const image = document.getElementById('restaurant-img');
     image.className = 'restaurant-img';
 
-    const imageSrc = DBHelper.imageUrlForRestaurant(restaurant);
+    // const imageSrc = DBHelper.imageUrlForRestaurant(restaurant);
 
     image.srcset = DBHelper.imageSrcsetForRestaurant(restaurant);
     image.sizes = "30vw";
@@ -144,7 +145,6 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     const cuisine = document.getElementById('restaurant-cuisine');
     cuisine.innerHTML = restaurant.cuisine_type;
 
-    // fill operating hours
     if (restaurant.operating_hours) {
         fillRestaurantHoursHTML();
     }
@@ -158,11 +158,9 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
         } else {
             fillReviewsHTML(review);
         }
-        // callback(null, review)
     });
 
 }
-
 
 fillFavouriteRestaurantHTML = (id, status, data) => {
 
@@ -251,17 +249,17 @@ createReviewFormHTML = (id = self.restaurant.id) => {
     reviewForm.setAttribute('onSubmit', 'fillOfflineReviewsHTML(event, this)');
     form.appendChild(reviewForm);
 
-    const title = document.createElement('h2'); // Heading of Form
+    const title = document.createElement('h2');
     title.setAttribute("class", "review");
     title.innerHTML = "Add a Review?";
     reviewForm.appendChild(title);
 
-    const nameLabel = document.createElement('label'); // Create Label for Name Field
+    const nameLabel = document.createElement('label');
     nameLabel.innerHTML = "Name"; // Set Field Labels
     nameLabel.setAttribute("class", "formElements");
     reviewForm.appendChild(nameLabel);
 
-    const name = document.createElement('input'); // Create Input Field for Name
+    const name = document.createElement('input');
     name.className = 'reviewer-name';
     name.setAttribute("type", "text");
     name.setAttribute("name", "name");
@@ -278,7 +276,7 @@ createReviewFormHTML = (id = self.restaurant.id) => {
     const lineBreak1 = document.createElement('br');
     reviewForm.appendChild(lineBreak1);
 
-    const ratingLabel = document.createElement('label'); // Create Label for Name Field
+    const ratingLabel = document.createElement('label');
     ratingLabel.innerHTML = "Rating"; // Set Field Labels
     reviewForm.appendChild(ratingLabel);
 
@@ -321,7 +319,7 @@ createReviewFormHTML = (id = self.restaurant.id) => {
     const lineBreak3 = document.createElement('br');
     reviewForm.appendChild(lineBreak3);
 
-    const commentsLabel = document.createElement('label'); // Create Label for Name Field
+    const commentsLabel = document.createElement('label');
     commentsLabel.innerHTML = "Comments"; // Set Field Labels
     commentsLabel.setAttribute("class", "formElements");
     reviewForm.appendChild(commentsLabel);
@@ -339,7 +337,7 @@ createReviewFormHTML = (id = self.restaurant.id) => {
     const lineBreak5 = document.createElement('br');
     reviewForm.appendChild(lineBreak5);
 
-    const submit = document.createElement('input'); // Append Submit Button
+    const submit = document.createElement('input');
     submit.setAttribute("type", "submit");
     submit.setAttribute("name", "dsubmit");
     submit.setAttribute("value", "Submit");
@@ -409,8 +407,3 @@ function fillOfflineReviewsHTML(event, form) {
     container.appendChild(ul);
     form.reset();
 }
-
-
-
-
-

@@ -23,6 +23,7 @@ window.addEventListener("load", () => {
     } else {
         document.getElementById("offline-notification-main").classList.remove("hide");
     }
+
     function handleNetworkChange(event) {
         if (navigator.onLine) {
             document.getElementById("offline-notification-main").classList.add("hide");
@@ -30,6 +31,7 @@ window.addEventListener("load", () => {
             document.getElementById("offline-notification-main").classList.remove("hide");
         }
     }
+
     window.addEventListener("online", handleNetworkChange);
     window.addEventListener("offline", handleNetworkChange);
 });
@@ -40,16 +42,15 @@ window.addEventListener("load", () => {
  */
 fetchNeighborhoods = () => {
     DBHelper.fetchNeighborhoods((error, neighborhoods) => {
-        if (error) {
-            //Error Handling
-            console.error(error);
-        } else {
-            self.neighborhoods = neighborhoods;
-            fillNeighborhoodsHTML();
+            if (error) {
+                console.error(error);
+            } else {
+                self.neighborhoods = neighborhoods;
+                fillNeighborhoodsHTML();
+            }
         }
-    }
     );
-}
+};
 
 /**
  * Set neighborhoods HTML.
@@ -68,7 +69,6 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
  * Fetch all cuisines and set their HTML.
  */
 fetchCuisines = () => {
-    console.log('self', self);
     DBHelper.fetchCuisines((error, cuisines) => {
         if (error) {
             console.error(error);
@@ -91,6 +91,7 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
         select.append(option);
     });
 }
+
 /**
  * Initialize Google map, called from HTML.
  */
@@ -105,8 +106,8 @@ window.initMap = () => {
         scrollwheel: false,
     });
     updateRestaurants();
+};
 
-}
 /**
  * Update page and map for current restaurants.
  */
@@ -121,7 +122,7 @@ updateRestaurants = () => {
     const neighborhood = nSelect[nIndex].value;
 
     DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, (error, restaurants) => {
-        if (error) { // Got an error!
+        if (error) {
             console.error(error);
         } else {
             resetRestaurants(restaurants);
@@ -129,21 +130,20 @@ updateRestaurants = () => {
         }
     })
 }
+
 /**
  * Clear current restaurants, their HTML and remove their map markers.
  */
 resetRestaurants = (restaurants) => {
-    // Remove all restaurants
     self.restaurants = [];
     const ul = document.getElementById('restaurants-list');
     ul.innerHTML = '';
-    // Remove all map markers
     self.markers.forEach(m => m.setMap(null)
-    )
-    ;
+    );
     self.markers = [];
     self.restaurants = restaurants;
 }
+
 /**
  * Create all restaurants HTML and add them to the webpage.
  */
@@ -154,7 +154,6 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
     })
     ;
     addMarkersToMap();
-    //Get count of restaurants returned in the list
     const resultsCount = document.getElementById("restaurants-list").getElementsByClassName('list-item').length;
     const resultHeader = document.getElementById("results-count");
     const resString = setResultString(resultsCount);
@@ -164,6 +163,7 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 /**
  * Create results count.
  */
+
 function setResultString(res) {
     let resString;
     if (res) {
@@ -200,7 +200,6 @@ createRestaurantHTML = (restaurant) => {
         observer = new IntersectionObserver(onChanges, config);
         observer.observe(image);
     } else {
-        console.log('Intersection Observers are not supported in this browser');
         loadImage(image);
     }
 
@@ -238,7 +237,6 @@ createRestaurantHTML = (restaurant) => {
     address.innerHTML = restaurant.address;
     li.append(address);
 
-
     const more = document.createElement('a');
     more.innerHTML = 'View Details';
     more.href = DBHelper.urlForRestaurant(restaurant);
@@ -247,13 +245,12 @@ createRestaurantHTML = (restaurant) => {
 
     return li
 }
+
 /**
  * Add markers for current restaurants to the map.
  */
 addMarkersToMap = (restaurants = self.restaurants) => {
-    console.log('restaurantsMain', restaurants);
     restaurants.forEach(restaurant => {
-        // Add marker to the map
         const marker = DBHelper.mapMarkerForRestaurant(restaurant, self.map);
         google.maps.event.addListener(marker, 'click', () => {
             window.location.href = marker.url
