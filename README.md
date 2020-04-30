@@ -2,7 +2,7 @@
 
 ![image](img/project-image.png)
 
-## Project Overview: 
+## Project Overview 
 
 Restaurant Reviews is a responsive, offline first, progressive web application (PWA), done for the Udacity Mobile Web Specialist Nanodegree as part of the Google Developer Scholarship program.
 
