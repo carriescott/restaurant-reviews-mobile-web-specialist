@@ -14,11 +14,11 @@ Restaurant Reviews is a responsive, offline first, progressive web application (
 >The application must achieve a lighthouse score > 90.
 
 ### Approach
-In order to achieve a lighthouse score > 90 4 main areas were worked on:
-1.Responsive Design
-2.Accessibility
-3.Application Data & Offline Use
-4.Performance
+In order to achieve a lighthouse score > 90,  4 main areas were worked on:
+1. Responsive Design
+2. Accessibility
+3. Application Data & Offline Use
+4. Performance
 
 #### Responsive Design 
 In order to ensure the application UI is compatible with a range of display sizes the following were implemented:
