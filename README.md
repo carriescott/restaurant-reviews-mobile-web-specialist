@@ -7,15 +7,14 @@
 Restaurant Reviews is a responsive, offline first, progressive web application (PWA), done for the Udacity Mobile Web Specialist Nanodegree as part of the Google Developer Scholarship program.
 
 ### Challenge
-
 >Leverage front end web patterns & APIs, such as service workers to convert a static web page into a mobile-ready web application, allowing users to look up restaurants in the New York area and view additional information about a selected restaurant.
 >Any data previously accessed by the user whilst connected is reachable while offline.
 >A user must also be able to leave a review and add a restaurant to their list of favourites both online and offline.  
 
-The application must achieve a lighthouse score > 90.
+>The application must achieve a lighthouse score > 90.
 
 ### Approach
-In order to achieve a lighthouse score > 90 I focused on 4 main areas; 
+In order to achieve a lighthouse score > 90 4 main areas were worked on:
 1.Responsive Design
 2.Accessibility
 3.Application Data & Offline Use
